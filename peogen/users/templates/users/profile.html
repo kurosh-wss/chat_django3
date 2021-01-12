@@ -1,0 +1,35 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {{ user.username }} Profile
+{% endblock title %}
+    
+
+{% block content %}
+    <div class="row">
+        <div class="col col-6">
+            <h1>{{ user.username }} Profile</h1>
+            <img src="{{ user.profile.image.url }}" alt="{{ user.username }} profile picture">
+        </div>
+        <div class="col col-6">
+
+            {{ user.profile.first_name }}
+            {{ user.profile.last_name }}
+        </div>
+    </div>
+    <div>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Profile Info</legend>
+                {{ user_form|crispy }}
+                {{ profile_form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class='btn btn-outline-info' type="submit">Update</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
+    
