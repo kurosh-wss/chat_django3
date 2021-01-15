@@ -1,4 +1,4 @@
-from celery import task
+from celery import shared_task
 from django.core.mail import send_mail
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
@@ -8,7 +8,7 @@ from django.core.mail import EmailMessage
 
 from django.contrib.auth.models import User
 
-@task
+@shared_task
 def user_registered(user_id):
     user = User.objects.get(id=user_id)
     to_email = user.email

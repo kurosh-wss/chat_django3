@@ -24,8 +24,7 @@ SITE_URL = 'http://127.0.0.1:8000'
 INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
-
-    'crispy_forms',
+    'chat.apps.ChatConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -33,6 +32,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'crispy_forms',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -74,6 +76,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        'TEST': {
+            'NAME': os.path.join(BASE_DIR, 'db_test.sqlite3')
+        }
     }
 }
 
@@ -142,3 +147,15 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # Redis server for celery
 
 CELERY_BROKER_URL = 'amqp://localhost'
+
+ASGI_APPLICATION = 'peogen.routing.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
+

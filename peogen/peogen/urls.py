@@ -12,7 +12,8 @@ urlpatterns = [
     path('register/', user_views.register, name="register"),
     path('active/<uidb64>/<token>/', user_views.activate, name="activate"),
     path('profile/', user_views.profile, name="profile"),
-    path("update_password", user_views.change_password, name="change_password"),
+    path("update_password/", user_views.change_password, name="change_password"),
+    path('chat/', include('chat.urls', namespace='chat')),
     path('', include('blog.urls', namespace='blog')),
 ]
 
