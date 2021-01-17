@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+celery = "*"
+django-crispy-forms = "*"
+channels = "*"
+pillow = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"
